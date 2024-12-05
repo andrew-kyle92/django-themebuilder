@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    {{ form.media }}
+
+    <!-- Prism CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid row">
+    <div id="form-div" class="col-3 border-end border-bottom">
+        <form id="form" action="{{ request.path }}" method="post" novalidate>
+            {% csrf_token %}
+            <ul id="tab-links" class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active tab-header" role="button" data-expanded="true" data-tab-id="themeContent">Theme</a></li>
+                <li class="nav-item"><a class="nav-link tab-header" role="button" data-expanded="false" data-tab-id="styleContent">Style Attributes</a></li>
+                <li class="nav-item"><a class="nav-link tab-header" role="button" data-expanded="false" data-tab-id="layoutContent">Layout</a></li>
+            </ul>
+
+            <div id="tabs-content" class="ms-3">
+            {% for section in form.sections %}
+                {# Theme section #}
+                {% if section.legend == 'Theme' %}
+                <div id="themeContent" class="mt-3 tab-content show-tab">
+                    {% for field in section.fields %}
+                    <div class="form-group my-3">
+                        <label class="{% if field.widget.input_type == 'checkbox' %}form-checkbox-label{% else %}form-label{% endif %}" for="{{ field.name }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {# Style Attribute Sections #}
+                {% elif section.legend == 'Style Attributes' %}
+                <div id="styleContent" class="mt-3 tab-content">
+                    {% for s in section.sections %}
+                        <h4 class="border-bottom">{{ s.legend }}</h4>
+                        {% if s.legend == 'Color Scheme' %}
+                            <div class="d-flex justify-content-between flex-wrap">
+                            {% for field in s.fields %}
+                                <div class="form-group my-3 w-50">
+                                    <label class="{{ field.name }}">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                    <div class="form-text">{{ field.help_text }}</div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            </div>
+                        {% else %}
+                            {% for field in s.fields %}
+                            <div class="form-group my-3">
+                                <label class="{{ field.name }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                            {% if s.sections is not None %}
+                                {% for add_section in s.sections %}
+                                    {% if add_section.legend == 'Heading Font Sizes' %}
+                                        <h5 class="border-bottom" style="width: fit-content">{{ add_section.legend }}</h5>
+                                        <div class="d-flex justify-content-between flex-wrap">
+                                        {% for field in add_section.fields %}
+                                            <div class="form-group my-3 w-50">
+                                                <label class="{{ field.name }}">{{ field.label }}</label>
+                                                {{ field }}
+                                                {% if field.help_text %}
+                                                <div class="form-text">{{ field.help_text }}</div>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {% for field in add_section.fields %}
+                                        <div class="form-group my-3">
+                                            <label class="{{ field.name }}">{{ field.label }}</label>
+                                            {{ field }}
+                                            {% if field.help_text %}
+                                            <div class="form-text">{{ field.help_text }}</div>
+                                            {% endif %}
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                {# Layout Sections #}
+                {% elif section.legend == 'Layout' %}
+                <div id="layoutContent" class="mt-3 tab-content">
+                    {% for field in section.fields %}
+                    <div class="form-group my-3">
+                        <label class="{{ field.name }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% if field.name == "header" or field.name == "footer" %}
+                        <button class="addTemplate btn btn-outline-primary btn-sm my-2" id="addTemplate" class="upload-button" type="button" data-bs-toggle="modal" data-bs-target="#templateUploadModal" data-template-type="{{ field.name }}">Add new {{ field.name }}</button>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+            <div class="submit ms-3 my-3">
+                <button class="btn btn-primary btn-lg" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="live-preview" class="col-9">
+        <iframe id="preview-header" src="{% url 'preview-header' %}{% if theme_pk %}?pk={{ theme_pk }}{% endif %}" style="width: 100%; height: auto; border: none;"></iframe>
+        <div id="preview-body" class="my-1" style="width: 100%; height: auto;">
+            <div id="widget-section" class="">
+
+            </div>
+        </div>
+        <iframe id="preview-footer" src="{% url 'preview-footer' %}{% if theme_pk %}?pk={{ theme_pk }}{% endif %}" style="width: 100%; height: auto; border: none;"></iframe>
+    </div>
+{#    <iframe id="live-preview" class="col-9" src="{% url 'theme-preview' %}{% if theme_pk %}?pk={{ theme_pk }}{% endif %}" style="height: 93vh; border: none;"></iframe>#}
+
+    <!-- Modals -->
+    <div id="templateUploadModal" class="modal fade" tabindex="-1" aria-labelledby="templateUploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="templateUploadModalLabel">Upload <span id="templateTypeText"></span> template</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="templateForm" method="post" action="{% url "upload-template" %}">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="name">Name</label>
+                            <input class="form-control" type="text" name="name" maxlength="50">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="template">Template</label>
+                            <input class="form-control" type="file" name="template" maxlength="50">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input id="id_custom_path" class="form-check-input" type="checkbox" name="custom_path">
+                            <label for="custom_path" class="form-check-label">Custom Path</label>
+                            <div class="form-text">This is recommended only for developers, if you do not know the layout of the backend code, it's recommended not to touch this.</div>
+                        </div>
+                        <div id="uploadPathDiv" class="form-group mb-3" hidden>
+                            <label for="upload_path" class="form-label">Upload Path</label>
+                            <input id="id_upload_path" class="form-control" type="text" name="upload_path">
+                            <div class="form-text">Custom path to upload file to</div>
+                        </div>
+                        <div class="form-group mb-3" hidden>
+                            <input id="id_template_type" type="text" name="template_type">
+                        </div>
+                        <button id="saveTemplate" class="btn btn-primary btn-lg" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <!-- TinyMCE -->
+    <script src="{% static 'tinymce/tinymce.min.js' %}" type="text/javascript"></script>
+
+    <!-- Preview Field Updates -->
+    <script src="{% static 'themebuilder/js/preview_field_updates.js' %}"></script>
+
+    <!-- add_template.js -->
+    <script src="{% static 'themebuilder/js/add_template.js' %}"></script>
+{% endblock %}

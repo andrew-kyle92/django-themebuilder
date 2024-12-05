@@ -1,0 +1,19 @@
+input[type=color] {
+    width: 60px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.show-tab {
+ display: block;
+}
+
+.read-only {
+    background: #B1AFAf;
+}
+
+.read-only:focus {
+    background: #B1AFAf;
+}

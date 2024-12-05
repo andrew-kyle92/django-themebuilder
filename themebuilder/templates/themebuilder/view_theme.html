@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid row">
+        <div class="col text-start">
+            <h3>{{ theme.theme_name }}</h3>
+        </div>
+        <div class="col text-center">
+            <p>{% if not theme.description %}{% else %}{{ theme.description }}{% endif %}</p>
+        </div>
+        <div class="col text-end">
+            <a class="link-primary" href="{% url 'update-theme' pk=theme.pk %}">Update Theme</a>
+        </div>
+    </div>
+
+    <iframe id="live-preview" class="container-fluid" src="{% url 'theme-preview' %}?pk={{ theme.pk }}" style="height: 93vh; border: none;"></iframe>
+{% endblock %}

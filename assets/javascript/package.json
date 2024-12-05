@@ -1,0 +1,14 @@
+{
+  "name": "themebuilder",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "codemirror": "^6.0.1"
+  }
+}

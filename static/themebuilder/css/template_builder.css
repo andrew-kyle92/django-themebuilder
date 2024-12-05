@@ -1,0 +1,36 @@
+/* Theme builder styles */
+.element-span {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.element-span:hover {
+    color: var(--bs-primary);
+}
+
+.widget-header-div {
+    align-items: center;
+    background-color: #3b3737;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.widget-header {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.widget-btn {
+    border: none;
+    border-radius: 5px;
+    color: #3b3737;
+    transition: all .15s ease;
+}
+
+.widget-btn:hover {
+    color: #fff;
+    background: #646161;
+}

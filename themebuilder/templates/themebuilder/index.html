@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container w-75 mt-3">
+        <h1>ThemeBuilder</h1>
+        <p>This app is for building themes for your Django project. To get started, build a new theme, <a href="{% url 'create-theme' %}">here</a>.</p>
+    </div>
+{% endblock %}

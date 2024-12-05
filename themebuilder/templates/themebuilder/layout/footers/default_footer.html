@@ -1,0 +1,48 @@
+<style>
+    /* Header styles */
+    footer {
+        background-color: var(--background-color)!important;
+        border-bottom: 1px solid var(--accent-color)!important; /* Can also use --accent-color */
+    }
+
+    footer .bi {
+        fill: var(--primary-color)!important; /* Logo icon color */
+    }
+
+    footer .fs-4 {
+        color: var(--secondary-color)!important; /* Header title color */
+    }
+
+    .link-body-emphasis {
+        color: var(--primary-color)!important; /* Main link color */
+    }
+
+    .nav-link {
+        color: var(--text-color)!important; /* Default nav link color */
+    }
+
+    .nav-link.active {
+        background-color: var(--secondary-color)!important;
+        color: var(--accent-color)!important; /* Active nav link color */
+    }
+
+    .nav-link:hover {
+        color: var(--primary-color)!important; /* Hover effect */
+    }
+</style>
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2024 Company, Inc</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Link 1</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Link 2</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Link 3</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Link 4</a></li>
+    </ul>
+</footer>

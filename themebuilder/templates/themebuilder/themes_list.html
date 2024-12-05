@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container w-75 my-3">
+        <h2 class="border-bottom">All Themes</h2>
+        <table class="table table-striped mt-3 table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <td>Theme Name</td>
+                    <td>Description</td>
+                    <td>Active</td>
+                    <td>Owner</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for theme in object_list %}
+                <tr>
+                    <td>{{ theme.theme_name }}</td>
+                    <td>{{ theme.description }}</td>
+                    <td>{{ theme.is_active }}</td>
+                    <td>{{ theme.user }}</td>
+                    <td><a href="{% url 'view-theme' pk=theme.pk %}">View</a> | <a href="{% url 'update-theme' pk=theme.pk %}">Edit</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+# python environments
+env/
+venv/
+.venv/
+
+# django dirs
+*/migrations
+*/settings.py
+
+# pycharm stuff
+.idea
+
+# node
+*/node_modules

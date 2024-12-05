@@ -1,0 +1,42 @@
+<style>
+    /* Header styles */
+    header {
+        background-color: var(--background-color)!important;
+        border-bottom: 1px solid var(--accent-color)!important; /* Can also use --accent-color */
+    }
+
+    header .bi {
+        fill: var(--primary-color)!important; /* Logo icon color */
+    }
+
+    header .fs-4 {
+        color: var(--secondary-color)!important; /* Header title color */
+    }
+
+    .link-body-emphasis {
+        color: var(--primary-color)!important; /* Main link color */
+    }
+
+    .nav-link {
+        color: var(--text-color)!important; /* Default nav link color */
+    }
+
+    .nav-link.active {
+        background-color: var(--secondary-color)!important;
+        color: var(--accent-color)!important; /* Active nav link color */
+    }
+
+    .nav-link:hover {
+        color: var(--primary-color)!important; /* Hover effect */
+    }
+</style>
+
+<header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Link 1</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Link 2</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Link 3</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Link 4</a></li>
+    </ul>
+</header>
