@@ -10,5 +10,7 @@ venv/
 # pycharm stuff
 .idea
 
+
 # node
 */node_modules
+static/themebuilder/rollup/node_modules

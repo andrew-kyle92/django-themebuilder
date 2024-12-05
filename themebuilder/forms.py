@@ -4,8 +4,6 @@ from django import forms
 from django.apps import apps
 from django.conf import settings
 
-from tinymce.widgets import TinyMCE
-
 from .models.models import *
 
 
@@ -65,21 +63,7 @@ class ThemeForm(forms.Form):
     duration = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control general-config'}), help_text="The duration (in seconds) of the animation.", required=False)
     delay = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control general-config'}), help_text="The delay (in seconds) of the animation.", required=False)
 
-    # custom css portion
-    @staticmethod
-    def css_configs():
-        return {
-            "plugins": "codesample",
-            "toolbar": "codesample",
-            "menubar": False,
-            "content_style": "body { font-family: monospace; font-size: 14px; }",
-            "height": 300,
-            "width": '100%',
-            "branding": False,
-            "codesample_global_prismjs": True,
-        }
-
-    custom_css = forms.CharField(widget=TinyMCE(attrs={'cols': 40, 'rows': 10}, mce_attrs=css_configs()), help_text="Custom css styling for this theme.", required=False)
+    custom_css = forms.CharField(widget=forms.Textarea(attrs={"hidden": True}), label="Custom CSS", help_text="The Custom CSS to use.", required=False)
 
     def __init__(self, *args, data=None, **kwargs):
         super().__init__(*args, **kwargs)

@@ -4,8 +4,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models, IntegrityError
 
-from tinymce import models as tinymce_models
-
 
 # Create your models here.
 class Theme(models.Model):

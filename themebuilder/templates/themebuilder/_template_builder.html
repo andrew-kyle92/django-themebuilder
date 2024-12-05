@@ -1,32 +1,10 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static djangocodemirror_tags %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block extra_head %}
-<!-- Core CodeMirror Files -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
 
-<!-- Addons (e.g., linting, folding, etc.) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/lint/css-lint.min.js" integrity="sha512-uvP6cZWrrQc4b+sluLwMcjWPDC/2oJMGAmCGJYqYbC/uBR74PAd/GRZ4nMoTfczKoRZOHkUbwHHugQBYVQQM4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/lint/html-lint.min.js" integrity="sha512-+1cU98RF1+fbQdVuO2Hph3BxSIz3kr25QnZkgk9dYXdLlhAJ8u+75mfy5UKMBRxlRWYe+MewgVcFTHrYl4Xi8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/lint/javascript-lint.min.js" integrity="sha512-8kwyIAPFqkeXy+ZFifnFBF57n5pSsXBBWuy9ME1hPCku0evC+UFNnWZOJlITFe/OMSxGi/oWaccjZ07L6YXzJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/lint/lint.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/fold/foldcode.min.js"></script>
-
-<!-- Mode -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/css/css.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/htmlmixed/htmlmixed.min.js"></script>
-
-<!-- Themes -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/monokai.min.css" integrity="sha512-R6PH4vSzF2Yxjdvb2p2FA06yWul+U0PDDav4b/od/oXf9Iw37zl10plvwOXelrjV2Ai7Eo3vyHeyFUjhXdBCVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/darcula.min.css" integrity="sha512-kqCOYFDdyQF4JM8RddA6rMBi9oaLdR0aEACdB95Xl1EgaBhaXMIe8T4uxmPitfq4qRmHqo+nBU2d1l+M4zUx1g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/dracula.min.css" integrity="sha512-gFMl3u9d0xt3WR8ZeW05MWm3yZ+ZfgsBVXLSOiFz2xeVrZ8Neg0+V1kkRIo9LikyA/T9HuS91kDfc2XWse0K0A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/elegant.min.css" integrity="sha512-FjbtybmXB5JlD6V2hIhRwyBJ2it+kVAb1SY3SJHa/nwduSutkpPQaBB90bASMZ49yICSb3XvgyLrO/CkIgZ7qA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/lucario.min.css" integrity="sha512-8CW1guslz3VSq681ZW1+pB3YXhfq5tGNqMsINg+1MyluwAu24D0LKlKVih8g/i1nYQOfhkenzNC0TZX9ZT5Nzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/twilight.min.css" integrity="sha512-bzVjABO+X5flJryNEqdwK+rIBPBI2DssZ6QA4S7NNyhxXAH8msk8ydKtwM2MF16g6QWmC6h4++z66pFFI3m7lQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block content %}

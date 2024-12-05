@@ -4,6 +4,8 @@ input[type=color] {
 
 .tab-content {
     display: none;
+    max-height: 75vh;
+    overflow: auto;
 }
 
 .show-tab {
